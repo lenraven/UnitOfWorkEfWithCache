@@ -34,7 +34,6 @@ namespace UnitOfWorkSampleTest
             using (testCase.BeginScope())
             {
                 var unitOfWork = testCase.GetService<IUnitOfWork>();
-
                 var localeRepository = testCase.GetService<ILocaleRepository>();
 
                 var partner = new Partner { Name = Guid.NewGuid().ToString() };
@@ -56,7 +55,6 @@ namespace UnitOfWorkSampleTest
             using (testCase.BeginScope())
             {
                 var unitOfWork = testCase.GetService<IUnitOfWork>();
-
                 var partnerRepository = testCase.GetService<IPartnerRepository>();
 
                 var partner = await partnerRepository.GetPartnerAsync(partnerId);
