@@ -1,10 +1,10 @@
-﻿using System;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace UnitOfWorkSample.Interface
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
-        Task SaveChangesAsync();
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

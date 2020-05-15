@@ -34,7 +34,7 @@ namespace UnitOfWorkSampleTest
                 c.Register<IOrganizationRepository, OrganizationSqlRepository>();
                 c.Register<ILocaleRepository, LocaleSqlRepository>();
                 
-                c.Register<IUnitOfWork, UnitOfWork>(Lifestyle.Scoped);
+                c.Register<IUnitOfWork>(c.GetInstance<DemoDbContext>);
             }),
 
             new TestCase("CacheTestCase", c =>
@@ -53,8 +53,8 @@ namespace UnitOfWorkSampleTest
                 c.Register<ILocaleRepository, LocaleCacheRepository>();
                 c.Register<LocaleSqlRepository>();
                 
-                c.Register<IUnitOfWork, UnitOfWork>(Lifestyle.Scoped);
-                c.Register<ICacheUnitOfWork, CacheUnitOfWork>();
+                c.Register<IUnitOfWork>(c.GetInstance<DemoDbContext>);
+                c.Register<ICacheUnitOfWork>(c.GetInstance<DemoDbContext>);
             })
         };
 
