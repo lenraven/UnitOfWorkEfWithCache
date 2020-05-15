@@ -58,7 +58,7 @@ namespace UnitOfWorkSample.Implementation.Sql.Context
         void ICacheUnitOfWork.Attach<TEntity>(TEntity entity)
             where TEntity : class
         {
-            Set<TEntity>().Attach(entity);
+            Attach(entity);
         }
     }
 }

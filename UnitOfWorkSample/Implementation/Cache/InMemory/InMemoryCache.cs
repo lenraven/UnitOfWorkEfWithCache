@@ -17,10 +17,9 @@ namespace UnitOfWorkSample.Implementation.Cache.InMemory
         {
             if (!cache.TryGetValue(cacheKey, out var result))
             {
+                await semaphore.WaitAsync();
                 try
                 {
-                    await semaphore.WaitAsync();
-
                     if (!cache.TryGetValue(cacheKey, out result))
                     {
                         result = await generator();
