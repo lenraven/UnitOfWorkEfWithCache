@@ -32,8 +32,9 @@ namespace UnitOfWorkSampleTest
         private async Task<Partner> CreatePartnerAsync(TestCase testCase)
         {
             using (testCase.BeginScope())
-            using(var unitOfWork = testCase.GetService<IUnitOfWork>())
             {
+                var unitOfWork = testCase.GetService<IUnitOfWork>();
+
                 var localeRepository = testCase.GetService<ILocaleRepository>();
 
                 var partner = new Partner { Name = Guid.NewGuid().ToString() };
@@ -53,8 +54,9 @@ namespace UnitOfWorkSampleTest
         private async Task<Organization> CreateOrganizationAsync(TestCase testCase, int partnerId)
         {
             using (testCase.BeginScope())
-            using(var unitOfWork = testCase.GetService<IUnitOfWork>())
             {
+                var unitOfWork = testCase.GetService<IUnitOfWork>();
+
                 var partnerRepository = testCase.GetService<IPartnerRepository>();
 
                 var partner = await partnerRepository.GetPartnerAsync(partnerId);

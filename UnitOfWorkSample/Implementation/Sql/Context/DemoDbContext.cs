@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using UnitOfWorkSample.Interface;
 using UnitOfWorkSample.Model;
 
 namespace UnitOfWorkSample.Implementation.Sql.Context
 {
-    public class DemoDbContext : DbContext
+    public class DemoDbContext : DbContext, IUnitOfWork, ICacheUnitOfWork
     {
         public DbSet<Locale> Locales => Set<Locale>();
         public DbSet<Organization> Organizations => Set<Organization>();
@@ -52,6 +53,12 @@ namespace UnitOfWorkSample.Implementation.Sql.Context
 
             modelBuilder.Entity<Organization>().HasKey(p => p.Id);
             modelBuilder.Entity<Organization>().Property(p => p.Name).HasMaxLength(250).IsRequired();
+        }
+
+        void ICacheUnitOfWork.Attach<TEntity>(TEntity entity)
+            where TEntity : class
+        {
+            Set<TEntity>().Attach(entity);
         }
     }
 }
